@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eating Well, Explained — A Practical Guide to Healthy Food</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#242019;
+    --paper:#FBF7EE;
+    --paper-deep:#F1EADA;
+    --forest:#1F3D2B;
+    --forest-deep:#16291D;
+    --mustard:#C98A2B;
+    --clay:#AD4E36;
+    --line:#D8CFB8;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-size:17px;
+    line-height:1.6;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    color:var(--forest-deep);
+    font-weight:500;
+    line-height:1.12;
+    margin:0;
+  }
+  a{color:inherit;}
+  img{display:block;width:100%;height:100%;object-fit:cover;}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  .prose{max-width:640px;}
+  .prose.center{margin:0 auto;}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:20;
+    background:rgba(251,247,238,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;}
+  .brand{font-family:'Fraunces',serif;font-size:20px;color:var(--forest-deep);letter-spacing:0.2px;}
+  .navlinks{display:flex;gap:28px;font-size:14px;}
+  .navlinks a{text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;}
+  .navlinks a:hover{border-bottom-color:var(--mustard);}
+  @media (max-width:720px){.navlinks{display:none;}}
+
+  /* HERO */
+  .hero{position:relative;height:86vh;min-height:560px;overflow:hidden;}
+  .hero img{filter:saturate(1.05) brightness(0.72);}
+  .hero-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(22,41,29,0.15) 0%, rgba(22,41,29,0.55) 78%, rgba(22,41,29,0.78) 100%);
+    display:flex;align-items:flex-end;
+  }
+  .hero-content{padding:0 32px 64px;max-width:1180px;margin:0 auto;width:100%;}
+  .hero h1{color:#FBF7EE;font-size:clamp(36px,5.4vw,66px);max-width:14ch;}
+  .hero p{color:#E9E2CC;max-width:46ch;margin-top:18px;font-size:18px;}
+
+  /* SECTION SPACING */
+  section{padding:96px 0;}
+  section.tight{padding:72px 0;}
+  .kicker{
+    font-family:'Work Sans',sans-serif;
+    font-size:14px;
+    color:var(--clay);
+    margin-bottom:14px;
+  }
+  h2{font-size:clamp(28px,3.4vw,40px);margin-bottom:22px;}
+  h2.wide{max-width:20ch;}
+  p{margin:0 0 16px;}
+  .lede{font-size:19px;color:#4A4437;}
+
+  hr.rule{border:none;border-top:1px solid var(--line);margin:0;}
+
+  /* IMAGE + TEXT SPLIT */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+  .split .figure{aspect-ratio:4/5;overflow:hidden;background:var(--paper-deep);}
+  .split.reverse .figure{order:2;}
+  @media (max-width:860px){
+    .split{grid-template-columns:1fr;gap:32px;}
+    .split .figure{order:0 !important;aspect-ratio:16/10;}
+  }
+
+  figcaption{font-size:13px;color:#7A7364;margin-top:10px;}
+
+  /* FULL BLEED BAND */
+  .band{position:relative;height:56vh;min-height:380px;}
+  .band img{filter:saturate(1.02);}
+
+  /* MACRO GRID */
+  .macro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:12px;}
+  .macro-cell{background:var(--paper);padding:36px 30px;}
+  .macro-cell .num{font-family:'Fraunces',serif;font-size:15px;color:var(--mustard);margin-bottom:10px;}
+  .macro-cell h3{font-size:21px;margin-bottom:10px;}
+  .macro-cell p{font-size:15px;color:#4A4437;margin:0;}
+  @media (max-width:760px){.macro-grid{grid-template-columns:1fr;}}
+
+  /* FOOD GROUPS LIST */
+  .group-row{display:grid;grid-template-columns:220px 1fr;gap:36px;padding:28px 0;border-top:1px solid var(--line);}
+  .group-row:last-child{border-bottom:1px solid var(--line);}
+  .group-row h3{font-size:19px;margin-bottom:6px;color:var(--forest-deep);}
+  .group-row .amount{font-size:13px;color:var(--clay);letter-spacing:0.2px;}
+  .group-row p{font-size:15px;color:#4A4437;margin:0;}
+  @media (max-width:640px){.group-row{grid-template-columns:1fr;gap:6px;}}
+
+  /* LABEL DIAGRAM */
+  .label-block{display:grid;grid-template-columns:0.9fr 1.1fr;gap:64px;align-items:start;}
+  @media (max-width:860px){.label-block{grid-template-columns:1fr;}}
+  .label-card{background:var(--paper-deep);border:1px solid var(--line);padding:28px 26px;}
+  .label-card .lname{font-family:'Fraunces',serif;font-size:22px;margin-bottom:2px;}
+  .label-card .lsub{font-size:12px;color:#7A7364;margin-bottom:16px;}
+  .label-row{display:flex;justify-content:space-between;font-size:14px;padding:8px 0;border-top:1px solid var(--line);}
+  .label-row.bold{font-weight:600;}
+  .label-row .lbl-note{color:#7A7364;font-size:11px;display:block;margin-top:2px;font-weight:400;}
+  .checklist p{font-size:15px;}
+  .checklist .item{padding:16px 0;border-top:1px solid var(--line);}
+  .checklist .item:last-child{border-bottom:1px solid var(--line);}
+  .checklist h4{font-family:'Fraunces',serif;font-weight:500;font-size:17px;margin:0 0 6px;}
+
+  /* MYTHS */
+  .myth{padding:26px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1.6fr;gap:24px;}
+  .myth:last-child{border-bottom:1px solid var(--line);}
+  .myth .claim{font-family:'Fraunces',serif;font-size:18px;color:var(--clay);}
+  .myth .fact{font-size:15px;color:#4A4437;}
+  @media (max-width:700px){.myth{grid-template-columns:1fr;gap:8px;}}
+
+  /* PLATE DIAGRAM */
+  .plate-wrap{display:flex;justify-content:center;margin:40px 0 8px;}
+  .plate{width:min(420px,86vw);aspect-ratio:1;border-radius:50%;position:relative;background:conic-gradient(
+      #4C7A54 0deg 180deg,
+      #C98A2B 180deg 270deg,
+      #AD4E36 270deg 360deg
+    );box-shadow:inset 0 0 0 10px var(--paper), 0 0 0 1px var(--line);}
+  .plate-legend{display:flex;flex-wrap:wrap;gap:22px;justify-content:center;margin-top:22px;font-size:13px;}
+  .swatch{display:inline-block;width:10px;height:10px;margin-right:8px;border-radius:2px;position:relative;top:1px;}
+
+  footer{background:var(--forest-deep);color:#DCD6C2;padding:64px 0 40px;margin-top:40px;}
+  footer .wrap{display:flex;flex-direction:column;gap:8px;}
+  footer h2{color:#FBF7EE;font-size:26px;max-width:20ch;}
+  footer p{color:#B7AF98;max-width:60ch;font-size:14px;}
+  footer .fine{margin-top:36px;font-size:12px;color:#7D7962;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">Eating Well, Explained</div>
+    <div class="navlinks">
+      <a href="#why">Why it matters</a>
+      <a href="#macros">Nutrients</a>
+      <a href="#groups">Food groups</a>
+      <a href="#labels">Labels</a>
+      <a href="#myths">Myths</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=1800&auto=format&fit=crop" alt="An overhead spread of fresh colorful vegetables and fruit">
+  <div class="hero-overlay">
+    <div class="hero-content">
+      <h1>Understanding what healthy food actually means</h1>
+      <p>A plain-language guide to nutrients, food groups, labels, and the everyday choices that add up — no fads, no rules to memorize, just the facts worth knowing.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section id="why" class="tight">
+    <div class="wrap">
+      <div class="prose">
+        <div class="kicker">Why it matters</div>
+        <h2 class="wide">Food is the raw material your body rebuilds itself from</h2>
+        <p class="lede">Every cell that repairs, every hormone that signals, every bit of energy that gets you through a day is built from what you've eaten. Diet doesn't just affect weight — it shapes energy levels, mood, sleep quality, immune strength, and long-term risk for conditions like heart disease and type 2 diabetes.</p>
+        <p>None of this requires perfection. Research on eating patterns consistently points to the same underlying idea: mostly whole, minimally processed foods, a wide variety of plants, and moderation with added sugar, refined starch, and heavily processed items. The sections below break that down into something usable.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><hr class="rule"></div>
+
+  <section class="tight">
+    <div class="wrap">
+      <div class="split">
+        <div class="figure">
+          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1400&auto=format&fit=crop" alt="A wooden table with grains, legumes, nuts and fresh vegetables">
+        </div>
+        <div>
+          <div class="kicker">The core idea</div>
+          <h2>Balance, not restriction</h2>
+          <p>A "healthy diet" isn't a fixed list of approved foods. It's a pattern over time — most meals built around vegetables, fruit, whole grains, legumes, and lean protein, with room left for the foods you simply enjoy. Public health guidance (WHO, and national bodies like the USDA and NHS) converges on the same handful of principles rather than strict prohibitions.</p>
+          <p>What shifts outcomes most isn't any single "superfood," but the overall ratio: how much of your plate, week to week, comes from whole foods versus heavily processed ones.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="band">
+    <img src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?q=80&w=1800&auto=format&fit=crop" alt="Close up of grains, seeds and pulses in bowls">
+  </div>
+
+  <section id="macros">
+    <div class="wrap">
+      <div class="prose">
+        <div class="kicker">The building blocks</div>
+        <h2 class="wide">Macronutrients: what your body needs in bulk</h2>
+        <p class="lede">Carbohydrates, protein, and fat are called macronutrients because the body needs them in relatively large amounts. Each does a different job, and none of them is inherently "bad."</p>
+      </div>
+      <div class="macro-grid">
+        <div class="macro-cell">
+          <div class="num">01</div>
+          <h3>Carbohydrates</h3>
+          <p>The body's preferred energy source. Quality varies widely: whole grains, vegetables, fruit, and legumes come with fiber and digest slowly; refined starches and added sugars digest fast and offer little else nutritionally.</p>
+        </div>
+        <div class="macro-cell">
+          <div class="num">02</div>
+          <h3>Protein</h3>
+          <p>Used to build and repair muscle, enzymes, and hormones. Found in meat, fish, eggs, dairy, legumes, tofu, nuts, and whole grains — plant and animal sources can both fit a balanced diet.</p>
+        </div>
+        <div class="macro-cell">
+          <div class="num">03</div>
+          <h3>Fat</h3>
+          <p>Needed for hormone production and absorbing vitamins A, D, E, and K. Unsaturated fats (olive oil, nuts, avocado, fatty fish) support heart health; saturated and trans fats are best kept limited.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="wrap">
+      <div class="split reverse">
+        <div class="figure">
+          <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=1400&auto=format&fit=crop" alt="Assorted fresh fruit including citrus, berries and pomegranate">
+        </div>
+        <div>
+          <div class="kicker">The smaller-dose essentials</div>
+          <h2>Micronutrients and fiber</h2>
+          <p>Vitamins and minerals are needed in much smaller amounts than macronutrients, but their absence causes real problems — fatigue from low iron, weakened bones from low calcium and vitamin D, poor wound healing from low vitamin C. Eating a wide range of colors and plant types is the simplest way to cover the range, since different pigments correspond to different compounds.</p>
+          <p>Fiber, found only in plant foods, isn't absorbed for energy but feeds gut bacteria, slows sugar absorption, and supports regularity. Most adults fall short of the roughly 25–30g recommended daily — vegetables, fruit with skin on, legumes, and whole grains are the main sources.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><hr class="rule"></div>
+
+  <section id="groups">
+    <div class="wrap">
+      <div class="prose" style="max-width:720px;">
+        <div class="kicker">A practical map</div>
+        <h2 class="wide">The food groups, and roughly how much space they take</h2>
+        <p class="lede">Portion guidance varies by body size, activity level, and age, but the general shape below — drawn from plate-model guidance used by national health bodies — is a useful mental default.</p>
+      </div>
+
+      <div class="group-row">
+        <div><h3>Vegetables</h3><div class="amount">≈ 1/3 to 1/2 of the plate</div></div>
+        <p>The largest share of most meals. Aim for variety and color — leafy greens, cruciferous vegetables (broccoli, cabbage), roots, and alliums each bring different nutrients.</p>
+      </div>
+      <div class="group-row">
+        <div><h3>Whole grains &amp; starchy carbs</h3><div class="amount">≈ 1/4 of the plate</div></div>
+        <p>Oats, brown rice, whole wheat, quinoa, and starchy vegetables like potatoes. Choosing whole over refined versions keeps the fiber and slows digestion.</p>
+      </div>
+      <div class="group-row">
+        <div><h3>Protein</h3><div class="amount">≈ 1/4 of the plate</div></div>
+        <p>Fish, poultry, eggs, legumes, tofu, and lean meat. Fish (especially oily fish like salmon or sardines) is generally recommended a couple of times a week for its omega-3 content.</p>
+      </div>
+      <div class="group-row">
+        <div><h3>Fruit</h3><div class="amount">≈ 2 servings a day</div></div>
+        <p>A serving is roughly a medium piece of fruit or a small handful of berries. Whole fruit over juice — juicing removes most of the fiber.</p>
+      </div>
+      <div class="group-row">
+        <div><h3>Dairy or alternatives</h3><div class="amount">≈ 2–3 servings a day</div></div>
+        <p>Milk, yogurt, cheese, or fortified plant alternatives, mainly for calcium, protein, and vitamin D.</p>
+      </div>
+      <div class="group-row">
+        <div><h3>Fats &amp; oils</h3><div class="amount">In small, regular amounts</div></div>
+        <p>Olive oil, nuts, seeds, and avocado in modest quantities support nutrient absorption and satiety.</p>
+      </div>
+
+      <div class="plate-wrap">
+        <div class="plate"></div>
+      </div>
+      <div class="plate-legend">
+        <span><span class="swatch" style="background:#4C7A54"></span>Vegetables &amp; fruit</span>
+        <span><span class="swatch" style="background:#C98A2B"></span>Whole grains</span>
+        <span><span class="swatch" style="background:#AD4E36"></span>Protein</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="band">
+    <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=1800&auto=format&fit=crop" alt="Person pouring a glass of water at a table with fresh food">
+  </div>
+
+  <section class="tight">
+    <div class="wrap">
+      <div class="split">
+        <div class="figure">
+          <img src="https://images.unsplash.com/photo-1523362628745-0c100150b504?q=80&w=1400&auto=format&fit=crop" alt="A glass of water beside citrus fruit"></div>
+        <div>
+          <div class="kicker">The overlooked nutrient</div>
+          <h2>Hydration</h2>
+          <p>Water regulates temperature, cushions joints, and carries nutrients through the bloodstream. Needs vary with body size, climate, and activity, but a common reference point is about 2–2.5 liters (roughly 8 glasses) a day from fluids and food combined.</p>
+          <p>Thirst is a reasonably reliable signal for most healthy adults; pale yellow urine is a simple everyday check. Water-rich foods — cucumber, watermelon, soups, citrus — also count toward the total.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><hr class="rule"></div>
+
+  <section id="labels">
+    <div class="wrap">
+      <div class="prose" style="max-width:720px;margin-bottom:12px;">
+        <div class="kicker">Reading the fine print</div>
+        <h2 class="wide">How to read a nutrition label in under a minute</h2>
+        <p class="lede">Packaging can be persuasive; the nutrition panel is where the actual numbers live. A few checks cover most of what matters.</p>
+      </div>
+
+      <div class="label-block">
+        <div class="label-card">
+          <div class="lname">Nutrition Facts</div>
+          <div class="lsub">Per 100g serving</div>
+          <div class="label-row bold"><span>Calories</span><span>210 kcal</span></div>
+          <div class="label-row"><span>Total Fat<span class="lbl-note">Check saturated fat separately</span></span><span>9g</span></div>
+          <div class="label-row"><span>Sodium<span class="lbl-note">Under 120mg/100g is considered low</span></span><span>380mg</span></div>
+          <div class="label-row"><span>Total Carbohydrate</span><span>26g</span></div>
+          <div class="label-row"><span>— Sugars<span class="lbl-note">Watch for "added sugars" specifically</span></span><span>14g</span></div>
+          <div class="label-row"><span>Dietary Fiber<span class="lbl-note">Higher is generally better</span></span><span>3g</span></div>
+          <div class="label-row bold"><span>Protein</span><span>6g</span></div>
+        </div>
+
+        <div class="checklist">
+          <div class="item">
+            <h4>Start with the ingredient list, not the front of the pack</h4>
+            <p>Ingredients are listed by weight, heaviest first. If sugar, syrup, or refined oil appears in the first three items, the product leans processed regardless of front-label claims like "natural" or "made with real fruit."</p>
+          </div>
+          <div class="item">
+            <h4>Check serving size before comparing calories</h4>
+            <p>Two products can look similar until you notice one's numbers are per 30g and the other's are per 100g — always compare on the same basis.</p>
+          </div>
+          <div class="item">
+            <h4>Separate "sugars" from "added sugars"</h4>
+            <p>Naturally occurring sugar in plain yogurt or fruit isn't the same concern as sugar added during processing. Where labels distinguish the two, added sugar is the number worth watching.</p>
+          </div>
+          <div class="item">
+            <h4>Look at fiber and protein as a pair</h4>
+            <p>Foods that combine meaningful fiber and protein tend to be more filling per calorie — a quick proxy for overall food quality.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="band">
+    <img src="https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=1800&auto=format&fit=crop" alt="Fresh produce arranged in crates at a market">
+  </div>
+
+  <section id="myths">
+    <div class="wrap">
+      <div class="prose" style="max-width:720px;margin-bottom:8px;">
+        <div class="kicker">Separating signal from noise</div>
+        <h2 class="wide">A few common claims, checked against the evidence</h2>
+      </div>
+
+      <div class="myth">
+        <div class="claim">"Carbs are bad for you"</div>
+        <div class="fact">Whole-food carbohydrates — vegetables, fruit, legumes, whole grains — are consistently linked to better health outcomes in large population studies. The concern is specifically with refined grains and added sugar, not carbohydrates as a category.</div>
+      </div>
+      <div class="myth">
+        <div class="claim">"Skipping meals speeds up metabolism"</div>
+        <div class="fact">Meal timing has a much smaller effect on metabolic rate than overall diet quality and total intake. What matters more is what and how much is eaten over the day and week, not the exact number or spacing of meals.</div>
+      </div>
+      <div class="myth">
+        <div class="claim">"Detox diets remove toxins"</div>
+        <div class="fact">The liver and kidneys handle detoxification continuously; no food, juice, or tea accelerates that process. "Detox" products are a marketing category, not a physiological one.</div>
+      </div>
+      <div class="myth">
+        <div class="claim">"Fat-free means healthy"</div>
+        <div class="fact">Removing fat from a processed product often means adding sugar or starch to preserve taste and texture, which can leave the item less nutritionally useful than the full-fat version.</div>
+      </div>
+      <div class="myth">
+        <div class="claim">"You need supplements to eat well"</div>
+        <div class="fact">For most people without a diagnosed deficiency, a varied diet covers nutrient needs. Supplements fill specific, identified gaps (like vitamin D in low-sunlight climates) rather than replacing food broadly.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><hr class="rule"></div>
+
+  <section class="tight">
+    <div class="wrap">
+      <div class="split reverse">
+        <div class="figure">
+          <img src="https://images.unsplash.com/photo-1547496502-affa22d38842?q=80&w=1400&auto=format&fit=crop" alt="Meal prep containers with balanced portions of vegetables, grains and protein">
+        </div>
+        <div>
+          <div class="kicker">Putting it into practice</div>
+          <h2>Small, repeatable habits</h2>
+          <p>Sustainable change tends to come from a few consistent habits rather than a complete overhaul: keeping vegetables visible and ready to eat, cooking in batches so a whole-food option is always faster than a packaged one, reading labels on the few products bought most often, and treating dessert or takeout as a regular part of life rather than a failure to avoid.</p>
+          <p>Diet quality is cumulative — no single meal determines an outcome, and no single meal needs to be "perfect" either.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <h2>Food is information for your body — this page is information for you.</h2>
+    <p>General guidance drawn from public health sources including the WHO, USDA Dietary Guidelines, and NHS Eatwell Guide. Individual needs vary with age, health conditions, and activity level — for personal nutrition advice, a registered dietitian or physician is the right resource.</p>
+    <div class="fine">Eating Well, Explained — an informational guide.</div>
+  </div>
+</footer>
+
+</body>
+</html>
